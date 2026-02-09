@@ -48,6 +48,7 @@ class Test1_2Activity : AppCompatActivity() {
             // addToBackStack()을 이용해야한다.
             val transaction2 = fragmentManager.beginTransaction()
             transaction2.replace(R.id.fragmentContainer, TwoFragment())
+            // null 말고 특정 이름을 넣으면 해당 전용 스택이 된다. AAA로 넣으면 AAA로 지정한 스택이 쌓이고 BBB라고 하면 BBB라고 지정한 스택만 쌓인다.
             transaction2.addToBackStack(null)
             transaction2.commit()
         }
