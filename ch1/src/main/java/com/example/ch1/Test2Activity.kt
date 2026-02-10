@@ -8,7 +8,11 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.viewpager2.widget.ViewPager2
 import com.example.ch1.databinding.ActivityTest2Binding
 import com.example.ch1.databinding.ViewpagerItemBinding
 
@@ -26,8 +30,12 @@ class Test2Activity : AppCompatActivity() {
             insets
         }
 
-        // case 1 : RecyclerView의 adapter를 사용하는 케이스
-        binding.main.adapter = PagerAdapter()
+//        // case 1 : RecyclerView의 adapter를 사용하는 케이스
+//        binding.main.adapter = PagerAdapter()
+
+        // case 2 : FragmentStateAdapter를 사용하는 케이스
+        binding.main.adapter = PagerFragmentAdapter(this)
+        binding.main.orientation = ViewPager2.ORIENTATION_VERTICAL
     }
 }
 
@@ -72,4 +80,24 @@ class PagerAdapter : RecyclerView.Adapter<PagerViewHolder>() {
     }
 
     override fun getItemCount() = 3
+}
+
+// viewPager 항목은 fragment로 준비하는 경우의 adapter 영역
+class PagerFragmentAdapter(activity: FragmentActivity) : FragmentStateAdapter(activity) {
+    val fragments: List<Fragment>
+
+    init {
+        // fragment 미리 생성
+        // fragment 생성은 상황에 따라 생성하면 된다.
+        // fragment가 많다면 여기서 하는게 비효율적일 수도 있다.
+        fragments = listOf(OneFragment(), TwoFragment())
+    }
+
+    // 각 항목(화면)을 위한 fragment를 결정하기 위해서 자동 호출한다.
+    override fun createFragment(position: Int): Fragment {
+        return fragments[position]
+    }
+
+    override fun getItemCount() = fragments.size
+
 }
