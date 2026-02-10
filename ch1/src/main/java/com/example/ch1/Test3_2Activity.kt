@@ -42,7 +42,7 @@ class Test3_2Activity : AppCompatActivity() {
 class MyViewHoler2(val binding: RecyclerItemUpdateDeleteBinding) :
     RecyclerView.ViewHolder(binding.root)
 
-class MyAdapter2(val datas: MutableList<String>) : RecyclerView.Adapter<MyViewHoler2>() {
+class MyAdapter2(val data: MutableList<String>) : RecyclerView.Adapter<MyViewHoler2>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -57,8 +57,25 @@ class MyAdapter2(val datas: MutableList<String>) : RecyclerView.Adapter<MyViewHo
     }
 
     override fun onBindViewHolder(holder: MyViewHoler2, position: Int) {
-        holder.binding.itemData.text = datas[position]
+        holder.binding.itemData.text = data[position]
+
+        // case - notifyXXX 함수 이용하는 방법
+        holder.binding.updateButton.setOnClickListener {
+            var newData = data[position].toInt()
+            newData++
+            data[position] = newData.toString()
+            // 해당 position의 아이템 항목만 변경 요청한다.
+            notifyItemChanged(position)
+        }
+        holder.binding.deleteButton.setOnClickListener {
+            data.removeAt(position)
+            // 해당 항목이 삭제 되었을을 알려준다.
+            notifyItemRemoved(position)
+
+            // 그 하위에 있는 항목들의 위치가 변경되었음을 알려줘야한다.
+            notifyItemRangeChanged(position, data.size - position)
+        }
     }
 
-    override fun getItemCount() = datas.size
+    override fun getItemCount() = data.size
 }
