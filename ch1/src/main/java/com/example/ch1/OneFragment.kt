@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ch1.databinding.FragmentOneBinding
 
 class OneFragment : Fragment() {
@@ -16,6 +18,13 @@ class OneFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentOneBinding.inflate(inflater, container, false)
+        val datas = mutableListOf<String>()
+        for (i in 1..20) {
+            datas.add("Item $i")
+        }
+        binding.recycler.layoutManager = LinearLayoutManager(activity)
+        binding.recycler.adapter = MyAdapter(datas)
+        binding.recycler.addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
         return binding.root
     }
 }

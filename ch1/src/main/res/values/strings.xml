@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">ch1</string>
+    <!--    ActionBarToggleButton 상태 표현 문자열을 만든다.-->
+    <string name="drawer_open">Open Drawer</string>
+    <string name="drawer_close">Close Drawer</string>
+
 </resources>
