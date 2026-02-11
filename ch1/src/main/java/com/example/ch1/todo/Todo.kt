@@ -5,6 +5,6 @@ data class Todo(
     val id: Int,
     var title: String,
     var content: String,
-    var data: String,
+    var date: String,
     var completed: Int
 )

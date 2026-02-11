@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ch1.databinding.RecyclerFragmentListBinding
@@ -52,14 +51,14 @@ class ListTodoFragment : Fragment() {
 
         var preDate: String? = null
         for (vo in dbList) {
-            if (!vo.data.equals(preDate)) {
+            if (!vo.date.equals(preDate)) {
                 // 이전 데이터과 날짜가 다르다면
                 // 날짜 항목이 추가되어야 한다.
                 val headerItem = HeaderItem(
-                    date = SimpleDateFormat("yyyy년 MM월 dd일").format(Date(vo.data.toLong()))
+                    date = SimpleDateFormat("yyyy년 MM월 dd일").format(Date(vo.date.toLong()))
                 )
                 itemList.add(headerItem)
-                preDate = vo.data
+                preDate = vo.date
             }
             val dataItem = DataItem(
                 id = vo.id,
