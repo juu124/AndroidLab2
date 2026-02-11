@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?><!--acitivty에 메뉴 구성을 위한 xml이 아니다.
+NavigationView의 항목을 구성하기 위한 menu xml이다.
+-->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:icon="@android:drawable/ic_menu_today"
+        android:title="item 1" />
+    <item
+        android:icon="@android:drawable/ic_menu_edit"
+        android:title="item 2" />
+    <item
+        android:icon="@android:drawable/ic_menu_save"
+        android:title="item 3" />
+</menu>
