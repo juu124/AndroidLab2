@@ -43,4 +43,16 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    // 라이브러리 등록 sync now 순간 다운로드된다.
+    // group id (androidx.datastore) : artifact id (datastore-preferences) : version (1.2.0)
+
+    // implementation(libs.androidx.appcompat)
+    // 위에처럼 등록된 라이브러리는 하나의 프로젝트 내에 여러 모듈이 있을 수도 있다.
+    // 동일 라이브러리에 동일 버전을 여러 모듈이 사용할 수 있다.
+    // 아래처럼 선언하면.. 버전 변경시에 여러 모듈을 수정해야 한다는 불편함이 있다.
+    // 프로젝트의 라이브러리를 통합 관리해서 버전을 한곳에서만 관리한다.
+    // 모듈에서는 통합 관리된 라이브러리를 링크로만 걸어서 사용하자는 의미이다.
+    // libs.versions.toml 파일을 제공한다. 라이브러리 버전 관리 파일이다.
+    implementation("androidx.datastore:datastore-preferences:1.2.0")
 }
