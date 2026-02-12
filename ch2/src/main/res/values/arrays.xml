@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<!--    문자열 배열을 등록하고 싶다!
+항목을 제공하고 선택 설정을 위한 항목 나열 문자열..-->
+    <string-array name="my_color">
+        <item>RED</item>
+        <item>BLUE</item>
+        <item>GREEN</item>
+    </string-array>
+</resources>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <!--    설정화면이 분리되어 있다. 다른 설정 화면으로 이동하기 위한 정보를 xml에 지정한다.-->
+    <Preference
+        android:fragment="com.example.ch2.ASettingFragment"
+        android:key="a"
+        android:summary="A Setting Summary"
+        android:title="A Setting" />
+
+    <Preference
+        android:fragment="com.example.ch2.BSettingFragment"
+        android:key="b"
+        android:summary="B Setting Summary"
+        android:title="B Setting" />
+
+    <EditTextPreference
+        android:key="id"
+        android:title="ID 설정" />
+
+    <!--    entries : 화면 출력 문자열
+    entryValues : 설정 저장 값 문자열이다. -->
+    <ListPreference
+        android:entries="@array/my_color"
+        android:entryValues="@array/my_color"
+        android:key="color"
+        android:title="Color 설정" />
+</androidx.preference.PreferenceScreen>

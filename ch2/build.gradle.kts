@@ -55,4 +55,13 @@ dependencies {
     // 모듈에서는 통합 관리된 라이브러리를 링크로만 걸어서 사용하자는 의미이다.
     // libs.versions.toml 파일을 제공한다. 라이브러리 버전 관리 파일이다.
     implementation("androidx.datastore:datastore-preferences:1.2.0")
+
+    // 구글의 라이브러리를 추가할 때, 동일 이름으로 -ktx 가 추가된 라이브러리이다.
+    // aaa라는 라이블러리가 있다고 가정하자
+    // aaa : java로 만든 라이브러리
+    // aaa-ktx : kotlin으로 만든 라이브러리
+    // 코틀린에서 aaa인 java라이브러리를 사용해도 된다. 조금 불편하다.
+    // java에서는 aaa-ktx는 사용하지 못한다.
+    // 기왕 ktx로 코틀린 편하라고 지원하니까 ktx 라이브러리를 사용하자.
+    implementation("androidx.preference:preference-ktx:1.2.1")
 }
