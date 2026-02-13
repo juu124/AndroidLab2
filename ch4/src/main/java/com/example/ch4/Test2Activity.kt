@@ -2,6 +2,8 @@ package com.example.ch4
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
@@ -10,6 +12,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
+import androidx.core.app.RemoteInput
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -79,6 +82,41 @@ class Test2Activity : AppCompatActivity() {
         builder.setWhen(System.currentTimeMillis())
         builder.setContentTitle("메세지 도착")
         builder.setContentText("안녕하세요.")
+
+        // 확장 클릭 이벤트 처리.. 상세보기 화면으로 이동한다.
+        // 이벤트시 발생시킬 인텐트 준비
+        val intent = Intent(this, DetailActivity::class.java)
+        // 이벤트 발생 의뢰
+        val pIntent = PendingIntent.getActivity(this, 10, intent, PendingIntent.FLAG_IMMUTABLE)
+        builder.setContentIntent(pIntent)
+
+        // 액션 추가
+        val intent2 = Intent(this, MyReceiver::class.java)
+        val pIntent2 = PendingIntent.getBroadcast(this, 10, intent2, PendingIntent.FLAG_IMMUTABLE)
+        builder.setContentIntent(pIntent2)
+        builder.addAction(
+            NotificationCompat.Action.Builder(
+                android.R.drawable.stat_notify_more,
+                "Action1",
+                pIntent2
+            ).build()
+        )
+
+        // remote input...
+        val remoteInput = RemoteInput.Builder("key_reply").run {
+            setLabel("답장")
+            build()
+        }
+        // 이 remote input 에 입력한 데이터를 받을 component intent 준비..
+        val intent3 = Intent(this, MyRemoteInputReceiver::class.java)
+        val pIntent3 = PendingIntent.getBroadcast(this, 10, intent3, PendingIntent.FLAG_MUTABLE)
+        builder.addAction(
+            NotificationCompat.Action.Builder(
+                R.drawable.send,
+                "답장",
+                pIntent3
+            ).addRemoteInput(remoteInput).build()
+        )
 
         manager.notify(11, builder.build())
     }

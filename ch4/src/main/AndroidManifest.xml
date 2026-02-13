@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-<!--    33 이상에서 요구한다. 유저에게 허락 받아야한다.
-32까지는 퍼미션 없다.-->
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+
+    <!--
+33 이상에서 요구한다. 유저에게 허락 받아야한다.
+32까지는 퍼미션 없다.
+    -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
         android:allowBackup="true"
@@ -11,6 +14,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidLab2">
+        <receiver
+            android:name=".MyRemoteInputReceiver"
+            android:enabled="true"
+            android:exported="true"></receiver>
+
+        <activity
+            android:name=".DetailActivity"
+            android:exported="false" />
         <activity
             android:name=".Test2Activity"
             android:exported="true">
