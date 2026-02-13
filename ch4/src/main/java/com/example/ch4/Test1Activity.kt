@@ -1,5 +1,6 @@
 package com.example.ch4
 
+import android.annotation.SuppressLint
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -21,6 +22,7 @@ class Test1Activity : AppCompatActivity() {
 
     lateinit var screenReceiver: BroadcastReceiver
 
+    @SuppressLint("UnspecifiedRegisterReceiverFlag")    // IDE가 예측할 수 있는 경고를 때리는 것 빌드하지 않고도 런타임 에러가 날 수도 있다는 것을 알려줌
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -51,7 +53,7 @@ class Test1Activity : AppCompatActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             registerReceiver(receiver, filter, Context.RECEIVER_EXPORTED)
         } else {
-            registerReceiver(return, filter, Context.RECEIVER_EXPORTED)
+            registerReceiver(return, filter)
         }
 
         binding.dynamicButton.setOnClickListener {
@@ -81,7 +83,7 @@ class Test1Activity : AppCompatActivity() {
             when (getIntExtra(BatteryManager.EXTRA_STATUS, -1)) {
                 BatteryManager.BATTERY_STATUS_CHARGING -> {
                     // 전원 공급중이라면..
-                    when(getIntExtra(BatteryManager.EXTRA_PLUGGED, -1)) {
+                    when (getIntExtra(BatteryManager.EXTRA_PLUGGED, -1)) {
                         BatteryManager.BATTERY_PLUGGED_USB -> {
                             // 지속 충전
                             binding.chargingResultView.text = "USB Plugged"
@@ -89,6 +91,7 @@ class Test1Activity : AppCompatActivity() {
                                 BitmapFactory.decodeResource(resources, R.drawable.usb)
                             )
                         }
+
                         BatteryManager.BATTERY_PLUGGED_AC -> {
                             binding.chargingResultView.text = "AC Plugged"
                             binding.chargingImageView.setImageBitmap(
@@ -97,6 +100,7 @@ class Test1Activity : AppCompatActivity() {
                         }
                     }
                 }
+
                 else -> {
                     binding.chargingResultView.text = "No Plugged"
                 }
