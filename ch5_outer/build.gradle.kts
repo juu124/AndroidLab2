@@ -3,13 +3,13 @@ plugins {
 }
 
 android {
-    namespace = "com.example.ch5"
+    namespace = "com.example.ch5_outer"
     compileSdk {
         version = release(36)
     }
 
     defaultConfig {
-        applicationId = "com.example.ch5"
+        applicationId = "com.example.ch5_outer"
         minSdk = 24
         targetSdk = 36
         versionCode = 1
@@ -32,8 +32,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
 
-    viewBinding.enable = true
-
+    // aidl 사용 선언
     buildFeatures {
         aidl = true
     }
