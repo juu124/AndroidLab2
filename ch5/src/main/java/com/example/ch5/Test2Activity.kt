@@ -1,5 +1,8 @@
 package com.example.ch5
 
+import android.app.job.JobInfo
+import android.app.job.JobScheduler
+import android.content.ComponentName
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
@@ -61,6 +64,22 @@ class Test2Activity : AppCompatActivity() {
                     startService(intent)
                 }
             }
+        }
+
+        binding.jobButton.setOnClickListener {
+            val jobScheduler: JobScheduler? =
+                getSystemService(JOB_SCHEDULER_SERVICE) as JobScheduler
+            // 등록 조건
+            // 어느 서비스를 실행시키는 조건인지 명시되었다.
+            // jobId : 외부(액티비티 같은 곳에서)에서 구동중인 JobService를 종료시킬 때 필요하다.
+            val builder = JobInfo.Builder(
+                1,
+                ComponentName(this, MyJobService::class.java)
+            ) // 어떤서비스를 아래의 조건을 지정한다.
+            builder.setRequiredNetworkType(JobInfo.NETWORK_TYPE_UNMETERED)  // wifi에 연결되어있다면 상태의 조건을 지정
+            // 시스템에 동록
+            jobScheduler?.schedule(builder.build())
+
         }
     }
 }

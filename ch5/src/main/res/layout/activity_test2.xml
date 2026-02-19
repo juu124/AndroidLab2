@@ -14,4 +14,10 @@
         android:layout_height="wrap_content"
         android:text="foreground service" />
 
+    <Button
+        android:id="@+id/job_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="JOB service" />
+
 </LinearLayout>
