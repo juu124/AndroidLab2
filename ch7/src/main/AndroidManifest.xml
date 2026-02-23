@@ -4,6 +4,9 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
+<!--    google 지도 api 실습 - 지도 데이터 획득하기 위한 퍼미션 추가-->
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,6 +14,31 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidLab2">
+<!--    uses-library : 시스템이 앱을 실행할 때 이 라이브러리 지원하라는 것. 명시적으로 해당 라이브러리를 로딩해달라
+org.apache.http.legacy : 과거에 사용되었던 안드로이드 http platform에서 제공되는 lib
+현재는 시스템에서 가지고 있지만, 공식 로딩에서는 제외되었다.
+하지만, 오래된 어떤 라이브러리를 이용하고 있고, 그 라이브러리내에서 http 통신을 대행하는데, 그 라이브러리에서 사용할 수도 있기 때문에 알아야한다.-->
+        <uses-library android:name="org.apache.http.legacy"
+            android:required="false"/>
+
+<!--        meta-data : 지도를 위한 부가 정보
+내부적으로 play-service 라이브러리가 활용된다.-->
+        <meta-data android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyD3Zp95qVd9CVyJRIQ7e0Ad9SDzp1B3hvA"/>
+
+<!--    사용하는 라이브러리 버전-->
+        <meta-data android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version"/>
+
+        <activity
+            android:name=".Test3Activity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".Test2Activity"
             android:exported="true">
@@ -32,3 +60,18 @@
     </application>
 
 </manifest>
+
+<!--
+api 키를 획득하는 방법
+1. 개발자 컴퓨터내에서 SHA1 지문을 획득한다.
+    우측 gradle을 클릭한 후 Execute를 클릭 후 gradle signingReport 를 입력
+    SHA1: 60:87:7B:6D:07:C3:A1:AC:73:70:38:7D:60:C2:4B:8F:57:61:4A:A8
+
+2. android map console 사이트로 가기
+    - API 및 서비스 항목 클릭
+    - Maps SDK for Android을 enable로 설정하기 -> 해당 api 사용하겠음
+    - 키 및 사용자 인증정보 항목 클릭
+    - + 사용자 인증 정보 만들기 -> API키 클릭 -> API 키 수정
+    - 앱의 패키지 명과 SHA1을 넣음.
+    - 키 복사해서 meta-data key value에 넣음
+-->
