@@ -53,5 +53,32 @@ class Test2Activity : AppCompatActivity() {
                 t.printStackTrace()
             }
         })
+
+        binding.testButton.setOnClickListener {
+            // test1
+//            val call = networkService.test1("10", "hello")
+            // url : url https://reqres.in/group/10/users/hello
+
+            // test2
+//            val call = networkService.test2(
+//                mapOf<String, String>("one" to "hello", "two" to "world"),
+//                "kim"
+//            )
+            // url : url https://reqres.in/group/users?one=hello&two=world&name=kim
+
+            // test3
+            val call = networkService.test3(
+                User("1", "hello", "world", "a.jpg"),
+                "kim"
+            )
+            // url : url https://reqres.in/user/edit?name=kim
+            Log.d("jay", "url ${call.request().url()}")
+            call.request().body()?.let {
+                val buffer = okio.Buffer()
+                it.writeTo(buffer)
+                Log.d("jay", "body ${buffer.readUtf8()}")
+                // body {"avatar":"a.jpg","first_name":"hello","id":"1","last_name":"world"}
+            }
+        }
     }
 }

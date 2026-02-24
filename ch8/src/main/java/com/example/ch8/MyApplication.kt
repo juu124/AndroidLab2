@@ -10,7 +10,6 @@ class MyApplication : Application() {
 
     var networkService: UserNetworkService
 
-
     // retrofit에 등록할 client
     // retrofit으로 서버 연동이 발생할 때 서버 연동을 가로챌 인터셉터
     // addInterceptor 필요하다면 사용하면 된다. 필수는 아님
