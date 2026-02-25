@@ -5,6 +5,19 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+// 애플리케이션 내에서 Application을 상속 받은 클래스를 하나 만들 수도 있다. 없을 수도 있다.
+// 만약에 필요하다고 해서 Application을 상속 받은 클래스를 만들었다면 1개만 만들 수 있다.
+// manifest.xml에 등록하면 <application 태그에
+// 앱의 프로세스가 구동 될때, 최초에 가장 먼저 singletone 으로 생성 유지된다.
+// 앱 구동후 최초 한번 실행된다. 대부분 초기화하는 코드를 넣기에 좋다.
+// 앱 종료까지 유지되기 때문에. 과도한 데이터를 Application 객체에서 유지하는 것은 좋지 않다.
+// 다른 곳에서 (activity, service...)에서 Application 객체 이용은 applicationcontext..
+
+// 앱이 실행되면서 singleton으로 단 한번 실행되어야 하는 코드
+// 하지만 앱이 구동되고 바로 실행되지는 않는다.
+// 코틀린에서는 싱글톤 형태인 object AAA { } 을 이용할 수도 있다.
+
+
 // 최초의 한번
 class MyApplication : Application() {
 
